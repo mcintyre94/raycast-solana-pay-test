@@ -3,7 +3,7 @@
   "name": "solana-pay-test",
   "title": "Solana Pay Test",
   "description": "",
-  "icon": "command-icon.png",
+  "icon": "solana-logo.png",
   "author": "callum-mcintyre",
   "license": "MIT",
   "commands": [

@@ -1,4 +1,4 @@
-import { Detail, LaunchProps, getPreferenceValues } from "@raycast/api";
+import { Detail, LaunchProps, getPreferenceValues, environment } from "@raycast/api";
 import { encodeURL, TransferRequestURLFields, findReference, FindReferenceError, validateTransfer } from "@solana/pay";
 import { Connection, Keypair, PublicKey } from "@solana/web3.js";
 import BigNumber from "bignumber.js";
@@ -92,7 +92,7 @@ export default function Payme(props: LaunchProps<{ arguments: PaymeArguments }>)
         }
         return curr + 1;
       })
-    }, 200)
+    }, 400)
   }, []);
 
   // Create the QR code
@@ -105,22 +105,28 @@ export default function Payme(props: LaunchProps<{ arguments: PaymeArguments }>)
   };
 
   const solanaUrl = encodeURL(urlParams);
-  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=350x350&data=${encodeURIComponent(solanaUrl)}`
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=350x350&margin=10&data=${encodeURIComponent(solanaUrl)}`
   console.log(solanaUrl, qrUrl);
 
-  const title = `# Pay ${label} ${amount} ${currencyDisplay}`
+  const solanaPayLogo = environment.theme === "dark" ? "light-pay-logo.svg" : "dark-pay-logo.svg";
+
+  const title = `# Pay ${label} ${amount} ${currencyDisplay}`;
 
   const paymentDisplay = `
   ${title}
   
-  ![](${qrUrl})
+  ![QR code](${qrUrl})
   
-  Waiting for payment${loadingSequence[atInLoadingSequence]}`
+  Waiting for payment${loadingSequence[atInLoadingSequence]}
+  `;
 
   const paidDisplay = `
   ${title}
 
-  ## Payment received, thankyou! ✅`
+  ## Payment received, thankyou! ✅
+  
+  ![Solana Pay](${solanaPayLogo})
+  `;
 
   return (
     <Detail
