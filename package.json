@@ -1,0 +1,89 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "solana-pay-test",
+  "title": "Solana Pay Test",
+  "description": "",
+  "icon": "command-icon.png",
+  "author": "callum-mcintyre",
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "index",
+      "title": "payme",
+      "subtitle": "Pay me using Solana Pay",
+      "description": "Display a QR code to be paid using Solana Pay",
+      "mode": "view",
+      "arguments": [
+        {
+          "name": "amount",
+          "type": "text",
+          "placeholder": "1",
+          "required": true
+        },
+        {
+          "name": "currency",
+          "type": "text",
+          "placeholder": "usdc",
+          "required": true
+        }
+      ]
+    }
+  ],
+  "preferences": [
+    {
+      "name": "recipient",
+      "title": "Your Public Key",
+      "description": "Public key of the account to be paid",
+      "type": "textfield",
+      "required": true
+    },
+    {
+      "name": "label",
+      "title": "Label",
+      "description": "Label to display for payments",
+      "type": "textfield",
+      "required": true,
+      "placeholder": "My Store"
+    },
+    {
+      "name": "connection",
+      "title": "Connection URL",
+      "description": "RPC URL to use for connection",
+      "type": "textfield",
+      "required": false,
+      "default": "https://api.mainnet-beta.solana.com/"
+    },
+    {
+      "name": "usdc",
+      "title": "USDC Address",
+      "description": "Token address for USDC",
+      "type": "textfield",
+      "required": false,
+      "default": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.45.2",
+    "@raycast/utils": "^1.4.14",
+    "@solana/pay": "^0.2.4",
+    "@solana/web3.js": "^1.72.0",
+    "bignumber.js": "^9.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "18.8.3",
+    "@types/react": "18.0.9",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "prettier": "^2.5.1",
+    "typescript": "^4.4.3"
+  },
+  "scripts": {
+    "build": "ray build -e dist",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint",
+    "publish": "ray publish"
+  }
+}
